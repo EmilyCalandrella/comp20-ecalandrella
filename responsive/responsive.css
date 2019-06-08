@@ -1,0 +1,37 @@
+/*.panel1 {width:128; height:240;
+background:url(.....) 0 0px;}*/
+
+ 
+
+@media screen 
+  and (min-width: 1201px) {
+  	.software {width:128; height: 240;
+  		background: url("software.png") 0 0px;}
+  	/*body {
+  		width: 128;
+  		height: 240;
+  		background-image: url("software.png") 0 0px;
+
+  	}*/
+  }
+@media screen
+  and (max-width: 1200px)
+  and (min-width: 1101px) {
+  	.software {width:128; height: 240;
+  		background: url("software.png") 128 0px;}
+  	/*body {
+  		width: 128;
+  		height: 240;
+  		background-image: url("software.png") 128 0px;
+  		.software
+  	}*/
+  }
+
+@media screen
+  and (max-width: 1100)
+  and (min-width: 1001) {
+  	.software {width:128; height:240;
+  		background: url("software.png") 256 0px;}
+  }
+
+ 
