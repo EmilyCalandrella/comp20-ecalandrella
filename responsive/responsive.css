@@ -34,4 +34,66 @@ background:url(.....) 0 0px;}*/
   		background: url("software.png") 256 0px;}
   }
 
+
+@media screen
+  and (max-width: 1000)
+  and (min-width: 901) {
+  	.software {
+  		width: 128; height: 240;
+  		background: url("software.png") 384 0px;
+  	}
+  }
+
+@media screen
+  and (max-width: 900)
+  and (min-width: 801) {
+  	.software {
+  		width: 128; height: 240;
+  		background: url("software.png") 512 0px;
+  	}  	
+  }
+
+@media screen
+  and (max-width: 800)
+  and (min-width: 701) {
+  	.software {
+  		width: 128; height: 240;
+  		background: url("software.png") 0 -240px;
+  	}	
+  }
+
+@media screen
+  and (max-width: 700)
+  and (min-width: 601) {
+  	.software {
+  		width: 128; height: 240;
+  		background: url("software.png") 128 -240px;
+  	}	
+  }
+
+@media screen
+  and (max-width: 600)
+  and (min-width: 501) {
+  	.software {
+  		width: 128; height: 240;
+  		background: url("software.png") 256 -240px;
+  	}
+  }
+
+@media screen
+  and (max-width: 500)
+  and (min-width: 401) {
+  	.software {
+  		width: 128; height: 240;
+  		background: url("software.png") 384 -240px;
+  	}
+  }
+
+@media screen
+  and (max-width: 400) {
+  	.software {
+  		width: 128; height: 240;
+  		background: url("software.png") 512 -240px;
+  	}
+  }
  
