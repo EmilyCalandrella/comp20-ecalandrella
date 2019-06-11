@@ -19,12 +19,23 @@
 	// Complete this section and create a CSS file named style.css
 
 
-if (butwehavethepower.currentTime > 6 && butwehavethepower.currentTime < 8) {
-	lyrics.innerHTML = "words to the song"
-}
-else if (butwehavethepower.currentTime > 8 && butwehavethepower.currentTime < 10) {
-	lyrics.innerHTML = "more words"
-}
+var video = document.getElementById("butwehavethepower");
+var lyrics = document.getElementById("lyrics");
+video.addEventListener("timeupdate", function() {
+
+	if (video.currentTime > 6 && video.currentTime < 8) {
+		lyrics.innerHTML = "<h2> Come gather round, children, </h2>";
+	}
+	else if (video.currentTime > 8 && video.currentTime < 10) {
+		lyrics.innerHTML = "<h2> it's high time ye learned </h2>";
+	}
+	else if (video.currentTime > 10 && video.currentTime < 12) {
+		lyrics.innerHTML = "<h2 'Bout a hero named Homer </h2>";
+	}
+	else if (video.currentTime > 12 && video.currentTime < 16) {
+		lyrics.innerHTML = "<h2 And a devil named Burns. </h2>";
+	}
+});
 
 
 </script>
