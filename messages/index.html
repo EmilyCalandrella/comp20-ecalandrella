@@ -10,6 +10,11 @@
     function loadMessages() {
       jsonData = '[{"id":1,"content":"Do you really want to hurt me?","username":"Boy"},{"id":2,"content":"Do you really want to make me cry?","username":"George"}]';
       // Your code here......
+      var outputs = JSON.parse(jsonData);
+      var messages = document.getElementById("messages");
+      for (i = 0; i < outputs.length; i++) {
+      	messages.innerHTML = outputs[i].content + outputs[i].username;
+      }
     }
   </script>
 </head>
