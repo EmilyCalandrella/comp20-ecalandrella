@@ -11,7 +11,13 @@ function initMap() {
 
 function addCars () {
 	var car = 'car.png';
+
 	var location1 = new google.maps.LatLng(42.3453, -71.0464);
+	var location2 = new google.maps.LatLng(42.3662, -71.0621);
+	var location3 = new google.maps.LatLng(42.3603, -71.0547);
+	var location4 = new google.maps.LatLng(42.3472, -71.0802);
+	var location5 = new google.maps.LatLng(42.3663, -71.0544);
+	var location6 = new google.maps.LatLng(42.3542, -71.0704);
 
 
 	var car1 = new google.maps.Marker ({
@@ -20,7 +26,46 @@ function addCars () {
 		title: "mXfkjrFw",
 		icon: car
 	})
+	var car2 = new google.maps.Marker ({
+		map: map,
+		position: location2,
+		title: "nZXB8ZHz",
+		icon: car
+	})
+	var car3 = new google.maps.Marker ({
+		map: map,
+		position: location3,
+		title: "Tkwu74WC",
+		icon: car
+	})	
+	var car4 = new google.maps.Marker ({
+		map: map,
+		position: location4,
+		title: "5KWpnAJN",
+		icon: car
+	})	
+	var car5 = new google.maps.Marker ({
+		map: map,
+		position: location5,
+		title: "uf5ZrXYw",
+		icon: car
+	})
+	var car6 = new google.maps.Marker ({
+		map: map,
+		position: location6,
+		title: "VMerzMH8",
+		icon: car
+	})				
+
 
 	car1.setMap(map);
+	car2.setMap(map);
+	car3.setMap(map);
+	car4.setMap(map);
+	car5.setMap(map);
+	car6.setMap(map);
+
 };
+
+
 
