@@ -111,11 +111,10 @@ function findCars() {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'https://hans-moleman.herokuapp.com/rides', true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	var jsonData = xhr.responseText;
 	xhr.onreadystatechange = function() {
 	    if(xhr.readyState == 4 && xhr.status == 200) {
-	    	 var outputs = JSON.parse(jsonData);
-	    	     console.log(outputs);
+	    	var jsonData = xhr.responseText;
+	    	var outputs = JSON.parse(jsonData);
 	    }
 	};
    
