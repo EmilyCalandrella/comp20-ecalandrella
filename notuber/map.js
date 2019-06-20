@@ -1,10 +1,12 @@
 var map;
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 42.352271, lng: -71.05524200000001},
-        zoom: 14
+        zoom: 12 //14 is best
 	});
 	addCars();
+	locateMe();
 }
 
 
@@ -65,7 +67,54 @@ function addCars () {
 	car5.setMap(map);
 	car6.setMap(map);
 
+
 };
+
+
+var location;
+var infoWindow;
+function locateMe() {
+
+	// check if geolocation is enabled
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			var pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+
+			infoWindow.setPosition(pos);
+			infoWindow.setContent("You are here");
+			infoWindow.open(map);
+			map.setCenter(pos);
+		}, function () {
+			// browser has geolocation enabled but there's still an error
+			handleLocationError(true, infoWindow, map.getCenter());
+		});
+	}
+	else {
+		handleLocationError(false, infoWindow, map.getCenter());
+	}
+
+	var mark = 'car.png';
+	var myCoords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	location = new google.maps.Marker ({
+		map: map,
+		position: myCoords,
+		title: "You are here",
+		icon: mark
+	})
+	location.setMap(map);
+}
+
+
+
+function handleLocationError (enabled, infoWindow, pos) {
+	infoWindow.setPosition(pos);
+	infoWindow.setContent(enabled ? 'Error: The geolocation service failed' :
+		'Error: Your browser does not support geolocation');
+	infoWindow.open(map);
+}
 
 
 
