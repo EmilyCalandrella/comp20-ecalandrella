@@ -1,4 +1,6 @@
 var map, infoWindow;
+var myLat;
+var myLng;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 42.352271, lng: -71.05524200000001},
@@ -8,9 +10,11 @@ function initMap() {
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
+    	myLat = position.coords.latitude;
+    	myLng = position.coords.longitude;
       var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
+        lat: myLat,
+        lng: myLng
       };
 
       infoWindow.setPosition(pos);
@@ -96,4 +100,11 @@ function addCars () {
 	car6.setMap(map);
 
 };
+
+/*function getCars() {
+	var xhr = new XMLHttpRequest();
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send('user=6ST1sfMe&lat=' + )
+
+}*/
 
