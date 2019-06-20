@@ -28,6 +28,8 @@ function initMap() {
     handleLocationError(false, infoWindow, map.getCenter());
   }
   addCars();
+  findCars();
+
 }
 
 
@@ -101,10 +103,19 @@ function addCars () {
 
 };
 
-/*function getCars() {
-	var xhr = new XMLHttpRequest();
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhr.send('user=6ST1sfMe&lat=' + )
 
-}*/
+
+function findCars() {
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'https://hans-moleman.herokuapp.com/rides', true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.onreadystatechange = function() {
+	    if(xhr.readyState == 4 && xhr.status == 200) {
+	        var jsonData = xhr.responseText;
+	    }
+	};
+    var outputs = JSON.parse(jsonData);
+    var parameters = "username=6ST1sfMe&lat=" + myLat "&lng=" + myLng;
+    xhr.send(parameters);
+}
 
