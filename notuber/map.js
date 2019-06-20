@@ -1,6 +1,7 @@
 var map, infoWindow;
 var myLat;
 var myLng;
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 42.352271, lng: -71.05524200000001},
@@ -20,6 +21,20 @@ function initMap() {
       infoWindow.setPosition(pos);
       infoWindow.setContent('You are here');
       infoWindow.open(map);
+
+
+	  	var xhr = new XMLHttpRequest();
+		xhr.open('POST', 'https://hans-moleman.herokuapp.com/rides', true);
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function() {
+		    if(xhr.readyState == 4 && xhr.status == 200) {
+		    	var jsonData = xhr.responseText;
+		    	var outputs = JSON.parse(jsonData);
+		    }
+		}
+	    var params = "username=6ST1sfMe&lat=" + myLat + "&lng=" + myLng;
+	    console.log(params);
+	    xhr.send(params);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -28,9 +43,6 @@ function initMap() {
     handleLocationError(false, infoWindow, map.getCenter());
   }
   //addCars();
-  findCars();
-
-
 }
 
 
@@ -104,22 +116,3 @@ function addCars () {
 
 };
 */
-
-
-
-function findCars() {
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'https://hans-moleman.herokuapp.com/rides', true);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhr.onreadystatechange = function() {
-	    if(xhr.readyState == 4 && xhr.status == 200) {
-	    	var jsonData = xhr.responseText;
-	    	var outputs = JSON.parse(jsonData);
-	    }
-	};
-   
-    var params = "username=6ST1sfMe&lat=" + myLat + "&lng=" + myLng;
-    xhr.send(params);
-
-}
-
