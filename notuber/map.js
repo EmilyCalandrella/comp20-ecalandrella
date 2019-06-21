@@ -1,5 +1,6 @@
-var map, infoWindow;
-
+var map;
+var infoWindow;
+var marker;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 42.352271, lng: -71.05524200000001},
@@ -16,18 +17,8 @@ function initMap() {
         lng: myLng
       };
 
-      var marker = new google.maps.Marker ({
-      	map: map,
-      	position: pos,
-      	title: "You are here"
-      })
-
-      marker.addListener("click", function() {
-      	infoWindow = new google.maps.InfoWindow;
-        infoWindow.setPosition(pos);
-        infoWindow.setContent('The closest vehicle is.....');
-        infoWindow.open(map);
-      })
+      addMarker(pos);
+      addInfoWindow(pos);
 
 
 	  	var xhr = new XMLHttpRequest();
@@ -52,7 +43,22 @@ function initMap() {
   //addCars();
 }
 
+function addMarker(pos) {
+        marker = new google.maps.Marker ({
+      	map: map,
+      	position: pos,
+      	title: "You are here"
+      })	
+}
 
+function addInfoWindow(pos) {
+      marker.addListener("click", function() {
+      	infoWindow = new google.maps.InfoWindow;
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('The closest vehicle is.....');
+        infoWindow.open(map);
+      })
+}
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
