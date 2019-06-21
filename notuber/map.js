@@ -5,7 +5,7 @@ function initMap() {
     center: {lat: 42.352271, lng: -71.05524200000001},
     zoom: 12
   });
-  infoWindow = new google.maps.InfoWindow;
+  
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -22,9 +22,12 @@ function initMap() {
       	title: "You are here"
       })
 
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('You are here');
-      infoWindow.open(map);
+      marker.addListener("click", function() {
+      	infoWindow = new google.maps.InfoWindow;
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('The closest vehicle is.....');
+        infoWindow.open(map);
+      })
 
 
 	  	var xhr = new XMLHttpRequest();
