@@ -1,13 +1,16 @@
 var map;
 var infoWindow;
 var marker;
+var outputs;
+var jsonData;
+var carIcon = 'car.png';
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 42.352271, lng: -71.05524200000001},
     zoom: 12
-  });
+  })
   
-
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
     	var myLat = position.coords.latitude;
@@ -19,6 +22,7 @@ function initMap() {
 
       addMarker(pos);
       addInfoWindow(pos);
+      var from = new google.maps.LatLng(pos);
 
 
 	  	var xhr = new XMLHttpRequest();
@@ -26,13 +30,36 @@ function initMap() {
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhr.onreadystatechange = function() {
 		    if(xhr.readyState == 4 && xhr.status == 200) {
-		    	var jsonData = xhr.responseText;
-		    	var outputs = JSON.parse(jsonData);
-		    	console.log(outputs);
+		    	jsonData = xhr.responseText;
+		    	outputs = JSON.parse(jsonData);
+		    	var car;
+		    	var carMark;
+		    	var distances;
+		    	var to;
+		    	var carLat;
+		    	var carLng;
+				for (var i = 0; i < outputs.length; i++) {
+					car = outputs[i];
+					carLat = car.lat;
+					carLng = car.lng;
+					to = new google.maps.LatLng(carLat, carLng);
+					carMark = new google.maps.Marker ({
+						map: map,
+						position: to, //{lat: car.lat, lng: car.lng},
+						//title:
+						icon: carIcon
+					})
+					//distances = computeDistanceBetween(from, to);
+					//computeDistanceBetween(from, to)
+				}
+
 		    }
+
 		}
 	    var params = "username=6ST1sfMe&lat=" + myLat + "&lng=" + myLng;
 	    xhr.send(params);
+
+
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -40,14 +67,19 @@ function initMap() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
-  //addCars();
+
+
+
+
+
+
 }
 
 function addMarker(pos) {
         marker = new google.maps.Marker ({
-      	map: map,
-      	position: pos,
-      	title: "You are here"
+      		map: map,
+      		position: pos,
+      		title: "You are here"
       })	
 }
 
@@ -59,6 +91,10 @@ function addInfoWindow(pos) {
         infoWindow.open(map);
       })
 }
+
+
+
+
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
