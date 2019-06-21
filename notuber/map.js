@@ -49,7 +49,9 @@ function initMap() {
 						//title:
 						icon: carIcon
 					})
-					//distances = computeDistanceBetween(from, to);
+					distances = google.maps.geometry.spherical.computeDistanceBetween(from, to);
+					console.log(distances);
+
 					//computeDistanceBetween(from, to)
 				}
 
