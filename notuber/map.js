@@ -4,12 +4,14 @@ var marker;
 var outputs;
 var jsonData;
 var carIcon = 'car.png';
+var carCount = 0;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 42.352271, lng: -71.05524200000001},
     zoom: 12
   })
+
   
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -32,30 +34,34 @@ function initMap() {
 		    if(xhr.readyState == 4 && xhr.status == 200) {
 		    	jsonData = xhr.responseText;
 		    	outputs = JSON.parse(jsonData);
-		    	var car;
+		    	var cars = {};
 		    	var carMark;
-		    	var distances;
+		    	var distances = {};
 		    	var to;
-		    	var carLat;
-		    	var carLng;
 				for (var i = 0; i < outputs.length; i++) {
-					car = outputs[i];
-					carLat = car.lat;
-					carLng = car.lng;
-					to = new google.maps.LatLng(carLat, carLng);
+					carCount++;
+					cars[i] = outputs[i];
+					//to = new google.maps.LatLng(carLat, carLng);
+					to = new google.maps.LatLng(cars[i].lat, cars[i].lng)
 					carMark = new google.maps.Marker ({
 						map: map,
 						position: to, //{lat: car.lat, lng: car.lng},
-						//title:
+						title: cars[i].username,
 						icon: carIcon
 					})
-					distances = google.maps.geometry.spherical.computeDistanceBetween(from, to);
-					console.log(distances);
-
-					//computeDistanceBetween(from, to)
+					distances[i] = google.maps.geometry.spherical.computeDistanceBetween(from, to);
+				}
+				var shortest = distances[0];
+				for (var j = 0; j < carCount; j++) {
+					if (distances[j] < shortest) {
+						shortest = distances[j];
+					}
 				}
 
+
+				
 		    }
+
 
 		}
 	    var params = "username=6ST1sfMe&lat=" + myLat + "&lng=" + myLng;
