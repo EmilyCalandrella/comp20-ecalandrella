@@ -1,6 +1,4 @@
 var map, infoWindow;
-var myLat;
-var myLng;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -11,12 +9,18 @@ function initMap() {
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-    	myLat = position.coords.latitude;
-    	myLng = position.coords.longitude;
+    	var myLat = position.coords.latitude;
+    	var myLng = position.coords.longitude;
       var pos = {
         lat: myLat,
         lng: myLng
       };
+
+      var marker = new google.maps.Marker ({
+      	map: map,
+      	position: pos,
+      	title: "You are here"
+      })
 
       infoWindow.setPosition(pos);
       infoWindow.setContent('You are here');
@@ -30,10 +34,10 @@ function initMap() {
 		    if(xhr.readyState == 4 && xhr.status == 200) {
 		    	var jsonData = xhr.responseText;
 		    	var outputs = JSON.parse(jsonData);
+		    	console.log(outputs);
 		    }
 		}
 	    var params = "username=6ST1sfMe&lat=" + myLat + "&lng=" + myLng;
-	    console.log(params);
 	    xhr.send(params);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
