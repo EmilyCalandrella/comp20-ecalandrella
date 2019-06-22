@@ -7,3 +7,6 @@ Lab 10:
 I did not complete every part of the lab. I was able to determine my geolocation but did not successfully make a request to the Ride-Hailing API, or finish the subsequent steps. 
 I did not collaborate with anyone.
 I spent about 6 hours on this lab so far.
+
+Lab 10 Update:
+The rest of the lab is now complete. I spent about four more hours on it and did not collaborate with anyone.
