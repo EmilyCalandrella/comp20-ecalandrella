@@ -23,7 +23,7 @@ function initMap() {
 	      	addMarker(pos);
 
 		  	var xhr = new XMLHttpRequest();
-			xhr.open('POST', 'https://hans-moleman.herokuapp.com/rides', true);
+			xhr.open('POST', 'https://aqueous-inlet-98773.herokuapp.com/rides', true);
 			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhr.onreadystatechange = function() {
 			    if(xhr.readyState == 4 && xhr.status == 200) {
