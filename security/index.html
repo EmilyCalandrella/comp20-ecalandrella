@@ -14,8 +14,13 @@
 	<h2>Abstract of Findings</h2>
 	The first issue I found was that all other websites are given access to Not Uber. This is dangerous; only sites that the creator of the website knows will need to access it should be allowed, instead of granting access to any website. Another issue is that the data stored in the mongo database is accessable by anyone who knows what to type as the URL. Finally, the source code of the website itself can be changed by anyone, which changes what Not Uber displays. 
 	<h2>Issues Found</h2>
-	The first issue I found was that the response header "Acess-Control-Allow-Origin" was set to "*", meaning that any other website can access Not Uber. This is bad programming practice. The issue was found by looking in the source code, server-vuln.js, as shown here: </br>
-	<img src="access.jpg" alt="Access-Control-Allow-Origin st to *"> <br/> 
+	The first issue I found was that the response header "Acess-Control-Allow-Origin" was set to "*", meaning that any other website can access Not Uber. This is bad programming practice. The issue was found by looking in the source code, server-vuln.js, as shown here: <br/>
+	<br/><img src="access.jpg" alt="Access-Control-Allow-Origin st to *"> <br/> <br/>
+	The next issue is that the website is not protected against NoSQL injection. This was found because the "/vehicles.json" section of the source code that takes in a username and displays the corresponding data, but it is set up so that if they query is a false statement, all of the data in the vehicle collection is displayed. So adding /vehicle.json?username[$ne]=anything to the end of the main URL displays all the data: <br/>
+	<br/><img src="vehicles.jpg" alt="vehicles.json data"> <br/> <br/>
+	Given that the point of the website is to give people information about where cars are located anyway, I would not say the severity of this issue is high, but it still is giving out in a way that wasn't intended, and the info could be used by a competing ride-hailing service, so I think this issue is of medium severity.
+
+
 	<h2>Conclusion</h2>
 </body>
 
