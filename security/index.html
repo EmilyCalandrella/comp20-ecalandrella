@@ -22,7 +22,7 @@
 	The third issue is that Cross-Site Scripting can be used to change the information displayed on Not Uber. I used curl in a terminal window and added javascript code to the username entry to cause the browser to interpret it as javascript and execute the command. I made it add an alert when the page loads: <br/> <br/>
 	<br/><img src="curl_hack.jpg" alt="'Hacked' pop-up window"> <br/> <br/>
 	This is a severe issue because somebody could make the website do all sorts of things it wasn't supposed to do, such as provide malicious links for users to click on.
-
-
 	<h2>Conclusion</h2>
+	Most of this website's security issues arise from allowing user input (the username). More protections should be added to ensure that people can't sumbit javascript that changes the source code or allows access to classified data. One way to do this is by escaping user input, which is when a specific character is inputted before characters such as "<" or ">" in the user's input. Then code is added to check for this character before implementing anything, and if it's found, the following character is treated just as plain text and not as a javascript tag.
+
 </body>
