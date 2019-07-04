@@ -9,19 +9,25 @@
 <body>
 	<h2>Introduction</h2>
 	Not Uber is a ride-hailing service. The Not Uber website displays the usernames of people who have requested vehicles and the time of each request. I have been hired as a consultant to find and resolve security issues. 
+	
 	<h2>Methodology</h2>
 	I first read the source code for Not Uber in order to find mistakes or places that could be vulnerable. Then I tested the vulnerabilites using NoSQL injects and Cross Site Scripting.
+	
 	<h2>Abstract of Findings</h2>
 	The first issue I found was that all other websites are given access to Not Uber. This is dangerous; only sites that the creator of the website knows will need to access it should be allowed, instead of granting access to any website. Another issue is that the data stored in the mongo database is accessable by anyone who knows what to type as the URL. Finally, the source code of the website itself can be changed by anyone, which changes what Not Uber displays. 
+	
 	<h2>Issues Found</h2>
 	The first issue I found was that the response header "Access-Control-Allow-Origin" was set to "*", meaning that any other website can access Not Uber. This is bad programming practice. The issue was found by looking in the source code, server-vuln.js, as shown here: <br/>
 	<br/><img src="access.jpg" alt="Access-Control-Allow-Origin st to *"> <br/> <br/>
-	The next issue is that the website is not protected against NoSQL injection. This was found because the "/vehicles.json" section of the source code that takes in a username and displays the corresponding data, but it is set up so that if they query is a false statement, all of the data in the vehicle collection is displayed. So adding /vehicle.json?username[$ne]=anything to the end of the main URL displays all the data: <br/>
+	
+	The next issue is that the website is not protected against NoSQL injection. This was found because the "/vehicles.json" section of the source code that takes in a username and displays the corresponding data, but it is set up so that if the query is a false statement, all of the data in the vehicle collection is displayed. So adding /vehicle.json?username[$ne]=anything to the end of the main URL displays all the data: <br/>
 	<br/><img src="vehicles.jpg" alt="vehicles.json data"> <br/> <br/>
 	Given that the point of the website is to give people information about where cars are located anyway, I would not say the severity of this issue is high, but it still is giving out in a way that wasn't intended, and the info could be used by a competing ride-hailing service, so I think this issue is of medium severity. <br/> <br/>
+	
 	The third issue is that Cross-Site Scripting can be used to change the information displayed on Not Uber. I used curl in a terminal window and added javascript code to the username entry to cause the browser to interpret it as javascript and execute the command. I made it add an alert when the page loads: <br/> <br/>
 	<br/><img src="curl_hack.jpg" alt="'Hacked' pop-up window"> <br/> <br/>
 	This is a severe issue because somebody could make the website do all sorts of things it wasn't supposed to do, such as provide malicious links for users to click on.
+	
 	<h2>Conclusion</h2>
 	Most of this website's security issues arise from allowing user input (the username). More protections should be added to ensure that people can't sumbit javascript that changes the source code or allows access to classified data. One way to do this is by escaping user input, which is when a specific character is inputted before characters such as "<" or ">" in the user's input. Then code is added to check for this character before implementing anything, and if it's found, the following character is treated just as plain text and not as a javascript tag.
 
