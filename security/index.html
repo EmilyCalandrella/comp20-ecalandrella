@@ -8,7 +8,9 @@
 
 <body>
 	<h2>Introduction</h2>
+	Not Uber is a ride-hailing service. The Not Uber website displays the usernames of people who have requested vehicles and the time of each request. I have been hired as a consultant to find and resolve security issues. 
 	<h2>Methodology</h2>
+	I first read the source code for Not Uber in order to find mistakes or places that could be vulnerable. Then I tested the vulnerabilites using NoSQL injects and Cross Site Scripting.
 	<h2>Abstract of Findings</h2>
 	The first issue I found was that all other websites are given access to Not Uber. This is dangerous; only sites that the creator of the website knows will need to access it should be allowed, instead of granting access to any website. Another issue is that the data stored in the mongo database is accessable by anyone who knows what to type as the URL. Finally, the source code of the website itself can be changed by anyone, which changes what Not Uber displays. 
 	<h2>Issues Found</h2>
